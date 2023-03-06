@@ -27,7 +27,7 @@ const userSchema = new Schema({
     location: {
         type: {
             type: String,
-            required: true
+            // required: true
         },
         coordinates: [Number]
     },
@@ -37,7 +37,7 @@ const userSchema = new Schema({
             min: 0,
             max: 5,
             default: 0,
-            required: true
+            // required: true
         },
         product: {
             type: {
