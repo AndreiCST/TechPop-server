@@ -21,37 +21,19 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'La contraseña de usuario es obligatoria']
     },
-    phoneNumber: {
-        type: Number,
+    // location: {
+    //     type: {
+    //         type: String,
+    //         required: true
+    //     },
+    //     coordinates: [Number]
+    // },
+    valorations: {
+        type: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Valoration'
+        }]
     },
-    location: {
-        type: {
-            type: String,
-            // required: true
-        },
-        coordinates: [Number]
-    },
-    valorations: [{
-        stars: {
-            type: Number,
-            min: 0,
-            max: 5,
-            default: 0,
-            // required: true
-        },
-        product: {
-            type: {
-                type: Schema.Types.ObjectId,
-                ref: 'Product'
-            }
-        },
-        description: {
-            type: String,
-            max: 200,
-            trim: true,
-        }
-
-    }],
     avatar: {
         type: String,
         set: string => string === '' ? 'https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png' : string
@@ -80,12 +62,6 @@ const userSchema = new Schema({
         }]
     },
     soldProducts: {
-        type: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Product'
-        }]
-    },
-    purchasingProducts: {
         type: [{
             type: Schema.Types.ObjectId,
             ref: 'Product'

@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const Product = require('./../models/Product.model')
+const Product = require('../../models/Product.model')
 
 router.get('/get-products', (req, res, next) => {
 
@@ -40,7 +40,7 @@ router.post('/delete/:id', (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.post('/:id', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
 
     const { id } = req.params
 
