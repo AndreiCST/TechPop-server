@@ -4,13 +4,13 @@ const productSchema = new Schema({
     name: {
         type: String,
         trim: true,
-        max: 50,
+        maxLength: 30,
         required: [true, 'El nombre del producto es obligatorio']
     },
     description: {
         type: String,
         trim: true,
-        max: 500,
+        maxLength: 500,
         required: [true, 'La descripcion del producto es obligatoria']
     },
     images: {
@@ -24,27 +24,29 @@ const productSchema = new Schema({
     },
     price: {
         type: Number,
-        required: true,
+        min: 0,
+        required: [true, 'el producto necesita un precio'],
     },
     stateOfProduct: {
         type: String,
-        enum: ['NEW', 'USED']
+        enum: ['NEW', 'ALMOSTNEW', 'USED', 'VERYUSED', 'NOTSPECIFIED'],
+        default: 'NOTSPECIFIED'
     },
     inSale: {
         type: Boolean,
         default: true
     },
-    category: {
+    category: [{
         type: Schema.Types.ObjectId,
-        ref: 'Category'
-    },
-    subcategory: {
+        ref: 'Category',
+    }],
+    subcategory: [{
         type: Schema.Types.ObjectId,
-        ref: 'Subcategory'
-    },
+        ref: 'Subcategory',
+    }],
     buyRequest: [{
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
     }]
 },
     {
