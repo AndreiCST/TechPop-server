@@ -1,11 +1,11 @@
 const router = require("express").Router()
 
 const bcrypt = require('bcryptjs')
-const User = require("../models/User.model")
+const User = require("../../models/User.model")
 const saltRounds = 10
 
 const jwt = require('jsonwebtoken')
-const { verifyToken } = require("../middlewares/verifyToken")
+const { verifyToken } = require("../../middlewares/verifyToken")
 
 router.post('/signup', (req, res, next) => {
 
