@@ -1,25 +1,21 @@
 const { Schema, model } = require("mongoose");
 
 const conversationSchema = new Schema({
-    messages: [
-        {
-            message: {
-                type: String,
-                required: true
-            },
-            sender: {
-                type: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'User',
-                    required: true
-                }
-            },
-            createdAt: {
-                type: Date,
-                default: Date.now
-            }
-        }
-    ]
+
+    messages: {
+        type: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Message'
+        }]
+    },
+    buyer: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    seller: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }
 },
     {
         timestamps: true
