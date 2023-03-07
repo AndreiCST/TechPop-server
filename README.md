@@ -13,8 +13,6 @@
 | GET    | /user/profile/:user_id                                                | Informacion basica del usuario                                 |
 | GET    | /user/conversations/:user_id                                          | Conversaciones del usuario                                     |
 | GET   x| /user/valorations/:user_id                                            | Valoraciones del usuario                                       |
-| GET    | /user/favourite/products/:user_id                                     | Productos favoritos del usuario                                |
-| GET    | /user/favourite/sellers/:user_id                                      | Vendedores favoritos del usuario                               |
 | GET   x| /user/traded/selling/:user_id                                         | Productos en venta del usuario                                 |
 | GET   x| /user/traded/sold/:user_id                                            | Productos vendidos del usuario                                 |
 | GET   x| /user/traded/purchased/:user_id                                       | Productos comprados por el usuario                             |
@@ -24,7 +22,7 @@
 | GET    | /user/traded/selling/:user_id                                         | Productos en venta del usuario                                 |
 | GET    | /user/traded/sold/:user_id                                            | Productos vendidos del usuario                                 |
 | GET    | /user/traded/purchased/:user_id                                       | Productos comprados por el usuario                             |
-| GET    | /user/wallet/:user_id                                                 | Cartera del usuario                                            |
+| GET   x| /user/wallet/:user_id                                                 | Cartera del usuario                                            |
 | GET    | /user/wallet/transactions/:user_id                                    | Cartera del usuario                                            |
 | POST   | /user/favourites/favouriteproducts/delete/:user_id/:product_id        | Borra el producto de favoritos                                 |
 | POST   | /user/favourites/favouriteproducts/add/:user_id/:product_id           | Añade producto a favoritos                                     |

@@ -1,7 +1,8 @@
 const router = require("express").Router()
 
 const bcrypt = require('bcryptjs')
-const User = require("../../models/User.model")
+const User = require('./../../models/User.model')
+const Wallet = require('./../../models/Wallet.model')
 const saltRounds = 10
 
 const jwt = require('jsonwebtoken')
@@ -16,11 +17,19 @@ router.post('/signup', (req, res, next) => {
         return
     }
 
-    User
-        .findOne({ email })
-        .then((foundUser) => {
+    const promises = [
+        User.findOne({ email }),
+        Wallet.create({})
+    ]
 
-            if (foundUser) {
+    Promise
+        .all(promises)
+        .then(results => {
+            console.log(results)
+            const promUser = results[0]
+            const promWallet = results[1]
+
+            if (promUser) {
                 res.status(400).json({ message: "User already exists." })
                 return
             }
@@ -28,12 +37,11 @@ router.post('/signup', (req, res, next) => {
             const salt = bcrypt.genSaltSync(saltRounds)
             const hashedPassword = bcrypt.hashSync(password, salt)
 
-            return User.create({ email, password: hashedPassword, firstName, lastName })
+            return User.create({ email, password: hashedPassword, firstName, lastName, wallet: promWallet._id })
         })
-        .then(() => res.sendStatus(201))
+        .then(user => res.status(201).json(user))
         .catch(err => next(err))
 })
-
 
 
 router.post('/login', (req, res, next) => {

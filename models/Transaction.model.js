@@ -1,23 +1,21 @@
 const { Schema, model } = require("mongoose");
 
 const transactionSchema = new Schema({
-    buyer: {
-        type: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        }
+    transactionType: {
+        type: String,
+        enum: ['PURCHASE', 'SALE']
     },
-    sellesr: {
-        type: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        }
+    buyer: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    seller: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     },
     product: {
-        type: {
-            type: Schema.Types.ObjectId,
-            ref: 'Product'
-        }
+        type: Schema.Types.ObjectId,
+        ref: 'Product'
     }
 },
     {
