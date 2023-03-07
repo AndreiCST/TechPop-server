@@ -77,12 +77,12 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Wallet'
     },
-    conversations: [{
-        type: {
+    conversations: {
+        type: [{
             type: Schema.Types.ObjectId,
             ref: 'Conversation'
-        }
-    }],
+        }]
+    },
     activeUser: {
         type: Boolean,
         default: true
