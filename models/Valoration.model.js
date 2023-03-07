@@ -9,10 +9,8 @@ const valorationSchema = new Schema({
         // required: true
     },
     product: {
-        type: {
-            type: Schema.Types.ObjectId,
-            ref: 'Product'
-        }
+        type: Schema.Types.ObjectId,
+        ref: 'Product'
     },
     description: {
         type: String,

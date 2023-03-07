@@ -12,6 +12,12 @@
 |--------|-----------------------------------------------------------------------|----------------------------------------------------------------|
 | GET    | /user/profile/:user_id                                                | Informacion basica del usuario                                 |
 | GET    | /user/conversations/:user_id                                          | Conversaciones del usuario                                     |
+| GET   x| /user/valorations/:user_id                                            | Valoraciones del usuario                                       |
+| GET    | /user/favourite/products/:user_id                                     | Productos favoritos del usuario                                |
+| GET    | /user/favourite/sellers/:user_id                                      | Vendedores favoritos del usuario                               |
+| GET   x| /user/traded/selling/:user_id                                         | Productos en venta del usuario                                 |
+| GET   x| /user/traded/sold/:user_id                                            | Productos vendidos del usuario                                 |
+| GET   x| /user/traded/purchased/:user_id                                       | Productos comprados por el usuario                             |
 | GET    | /user/valorations/:user_id                                            | Valoraciones del usuario                                       |
 | GET    | /user/favourites/favouriteproducts/:user_id                           | Productos favoritos del usuario                                |
 | GET    | /user/favourites/favouritesellers/:user_id                            | Vendedores favoritos del usuario                               |
@@ -27,9 +33,10 @@
 | POST   | /user/conversations/create/:user_id                                   | Crea conversacion                                              |
 | POST   | /user/conversations/add-message/:user_id                              | Añade mensaje a conversacion                                   |
 | POST   | /user/conversations/delete/:conv_id                                   | Elimina conversacion                                           |
-| POST   | /user/valorations/create/:user_id                                     | Crea valoracion                                                |
-| POST   | /user/traded/sold/add/:product_id                                     | Añade producto vendido                                         |
-| POST   | /user/traded/purchased/add/:product_id                                | Añade producto comprado                                        |
+| POST  x| /user/valorations/create/:product_id/:user_id                         | Crea valoracion                                                |
+| PUT   x| /user/traded/selling/add/:user_id/:product_id                         | Añade un producto en venta                                     |
+| PUT   x| /user/traded/sold/add/:user_id/:product_id                            | Añade un producto vendido                                      |
+| POST  x| /user/traded/purchased/add/:user_id/:product_id                       | Añade un producto comprado                                     |
 | POST   | /user/wallet/add-founds/:user_id                                      | Suma fondos a la cuenta y crea la transacion                   |
 | POST   | /user/wallet/rest-founds/:user_id                                     | Resta fondos a la cuenta  y crea la transacion                 |
 | POST   | /user/profile/edit/:id                                                | Edita un usuario en especifico                                 |
