@@ -13,17 +13,17 @@
 | GET    | /user/profile/:user_id                                                | Informacion basica del usuario                                 |
 | GET    | /user/conversations/:user_id                                          | Conversaciones del usuario                                     |
 | GET    | /user/valorations/:user_id                                            | Valoraciones del usuario                                       |
-| GET    | /user/favourite/products/:user_id                                     | Productos favoritos del usuario                                |
-| GET    | /user/favourite/sellers/:user_id                                      | Vendedores favoritos del usuario                               |
+| GET    | /user/favourites/favouriteproducts/:user_id                           | Productos favoritos del usuario                                |
+| GET    | /user/favourites/favouritesellers/:user_id                            | Vendedores favoritos del usuario                               |
 | GET    | /user/traded/selling/:user_id                                         | Productos en venta del usuario                                 |
 | GET    | /user/traded/sold/:user_id                                            | Productos vendidos del usuario                                 |
 | GET    | /user/traded/purchased/:user_id                                       | Productos comprados por el usuario                             |
 | GET    | /user/wallet/:user_id                                                 | Cartera del usuario                                            |
 | GET    | /user/wallet/transactions/:user_id                                    | Cartera del usuario                                            |
-| POST   | /user/favourite/products/delete/:product_id                           | Borra el producto de favoritos                                 |
-| POST   | /user/favourite/products/add/:product_id                              | Añade producto a favoritos                                     |
-| POST   | /user/favourite/sellers/delete/:user_id                               | Elimina vendedor favorito                                      |
-| POST   | /user/favourite/sellers/add/:user_id                                  | Añade vendedor favorito                                        |
+| POST   | /user/favourites/favouriteproducts/delete/:user_id/:product_id        | Borra el producto de favoritos                                 |
+| POST   | /user/favourites/favouriteproducts/add/:user_id/:product_id           | Añade producto a favoritos                                     |
+| POST   | /user/favourites/favouritesellers/delete/:user_id                     | Elimina vendedor favorito                                      |
+| POST   | /user/favourites/favouritesellers/add/:user_id                        | Añade vendedor favorito                                        |
 | POST   | /user/conversations/create/:user_id                                   | Crea conversacion                                              |
 | POST   | /user/conversations/add-message/:user_id                              | Añade mensaje a conversacion                                   |
 | POST   | /user/conversations/delete/:conv_id                                   | Elimina conversacion                                           |
