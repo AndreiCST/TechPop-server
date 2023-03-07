@@ -10,15 +10,11 @@ const walletSchema = new Schema({
         enum: ['EUR', 'USD', 'GBP', 'RON', 'CHF', 'YEN'],  //<---- esto si podemon utilizar una api de cambio de divisas
         default: 'EUR'
     },
-    moneyIn: [{
-        type: Number
-    }],
-    moneyOut: [{
-        type: Number
-    }],
-    owner: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
+    transactions: {
+        type: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Transaction'
+        }]
     }
 },
     {

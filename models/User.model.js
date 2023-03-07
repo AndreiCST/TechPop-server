@@ -73,11 +73,9 @@ const userSchema = new Schema({
             ref: 'Product'
         }]
     },
-    Wallet: {
-        type: {
-            type: Schema.Types.ObjectId,
-            ref: 'Wallet'
-        }
+    wallet: {
+        type: Schema.Types.ObjectId,
+        ref: 'Wallet'
     },
     conversations: [{
         type: {
