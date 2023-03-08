@@ -17,6 +17,7 @@ const productSchema = new Schema({
         type: [String],
         min: 1,
         max: 5,
+        required: [true, 'Necesitas al menos una imagen']
     },
     owner: {
         type: Schema.Types.ObjectId,
@@ -36,10 +37,12 @@ const productSchema = new Schema({
         type: Boolean,
         default: true
     },
-    category: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Category',
-    }],
+    category: {
+        type: String
+        // type: Schema.Types.ObjectId,
+        // ref: 'Category',
+        // required: [true, 'Necesita una categoria']
+    },
     subcategory: [{
         type: Schema.Types.ObjectId,
         ref: 'Subcategory',

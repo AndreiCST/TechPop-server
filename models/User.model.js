@@ -29,7 +29,11 @@ const userSchema = new Schema({
     //     coordinates: [Number]
     // },
     valorations: {
-        type: [{
+        avgValoration: {
+            type: Number,
+            default: 0
+        },
+        allValorations: [{
             type: Schema.Types.ObjectId,
             ref: 'Valoration'
         }]

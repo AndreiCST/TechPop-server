@@ -12,7 +12,10 @@ router.get('/:user_id', (req, res, next) => {
         .findById(user_id)
         .select({ wallet: 1 })
         .populate('wallet')
-        .then(wallet_id => res.send(wallet_id))
+        .then(({ wallet }) => {
+            const { _id, amount, currencie } = wallet
+            res.status(200).json({ _id, amount, currencie })
+        })
         .catch(err => next(err))
 })
 
@@ -24,18 +27,9 @@ router.get('/transactions/:wallet_id', (req, res, next) => {
         .findById(wallet_id)
         .select({ transactions: 1 })
         .populate('transactions')
-        .then(transactions => res.send(transactions))
+        .then(({ transactions }) => res.status(200).json(transactions))
         .catch(err => next(err))
 })
-
-
-// router.put('/transactions/add/:wallet_id/:transaction_id', (req, res, next) => {
-//     const { wallet_id, transaction_id } = req.params
-
-//     Wallet
-//         .findByIdAndUpdate(wallet_id, { $addToSet: { transactions: transaction_id } })
-//         .catch(err => next(err))
-// })
 
 
 router.put('/create-transaction/:seller_id/:buyer_id/:product_id', (req, res, next) => {
@@ -69,7 +63,7 @@ router.put('/create-transaction/:seller_id/:buyer_id/:product_id', (req, res, ne
 
             Promise.all([buyerWalletUpdate, sellerWalletUpdate])
         })
-        .then(() => res.send('siiuuuuuuuu'))
+        .then(() => res.status(200).json('Operacion realizada con exito'))
         .catch(err => next(err))
 
 })

@@ -26,7 +26,7 @@ router.put('/edit/:user_id', (req, res, next) => {
 
     User
         .findByIdAndUpdate(user_id, { firstName, lastName, email, password: hashedPassword, avatar }, { new: true })
-        .then((user) => res.status(200).json(user))
+        .then(user => res.status(200).json(`El usuario ${user.firstName} ${user.lastName} se ha editado`))
         .catch(err => next(err))
 })
 
@@ -37,7 +37,7 @@ router.delete('/delete/:user_id', (req, res, next) => {
 
     User
         .findByIdAndDelete(user_id, { new: true })
-        .then((users) => res.status(200).json({ users }))
+        .then(user => res.status(200).json(`El usuario ${user.firstName} ${user.lastName} se ha eliminado`))
         .catch(err => next(err))
 })
 

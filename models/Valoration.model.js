@@ -16,6 +16,10 @@ const valorationSchema = new Schema({
         type: String,
         max: 200,
         trim: true,
+    },
+    reviewer: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }
 },
     {
