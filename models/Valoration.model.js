@@ -14,7 +14,7 @@ const valorationSchema = new Schema({
     },
     description: {
         type: String,
-        max: 200,
+        max: [200, 'Maximo 200 caracteres'],
         trim: true,
     }
 },
