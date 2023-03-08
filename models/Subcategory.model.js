@@ -3,11 +3,11 @@ const { Schema, model } = require("mongoose");
 const subcategorySchema = new Schema({
     title: {
         type: String,
-        required: true
+        required: [true, 'Necesita un titulo']
     },
     cover: {
         type: String,
-        required: true
+        required: [true, 'Necesita una imagen']
     }
 
 },

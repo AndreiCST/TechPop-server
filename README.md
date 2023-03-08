@@ -11,7 +11,7 @@
 | GET    | /products/subcategory/create                                          | Crea una subcategoria                                          |
 |--------|-----------------------------------------------------------------------|----------------------------------------------------------------|
 | GET   x| /user/profile/:user_id                                                | Informacion basica del usuario                                 |
-| GET   x| /user/conversations/:user_id                                          | Conversaciones del usuario                                     |
+| GET   x| /user/conversations/conversation/:user_id                             | Conversaciones del usuario                                     |
 | GET   x| /user/valorations/:user_id                                            | Valoraciones del usuario                                       |
 | GET   x| /user/traded/selling/:user_id                                         | Productos en venta del usuario                                 |
 | GET   x| /user/traded/sold/:user_id                                            | Productos vendidos del usuario                                 |
@@ -29,7 +29,7 @@
 | POST  x| /user/favourites/favouritesellers/delete/:user_id                     | Elimina vendedor favorito                                      |
 | POST  x| /user/favourites/favouritesellers/add/:user_id                        | Añade vendedor favorito                                        |
 | POST  x| /user/conversations/create/:buyer_id/:seller_id                       | Crea conversacion                                              |
-| POST  x| /user/conversations/add-message/:user_id/:conversation_id             | Añade mensaje a conversacion                                   |
+| POST  x| /user/conversations/add-message/:conversation_id/:user_id             | Añade mensaje a conversacion                                   |
 | POST  x| /user/conversations/delete/:conversation_id                           | Elimina conversacion                                           |
 | POST  x| /user/valorations/create/:product_id/:user_id                         | Crea valoracion                                                |
 | PUT   x| /user/traded/selling/add/:user_id/:product_id                         | Añade un producto en venta                                     |

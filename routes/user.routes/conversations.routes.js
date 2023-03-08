@@ -5,7 +5,6 @@ const Message = require('./../../models/Message.model')
 const { response } = require('express')
 
 
-
 router.put('/create/:buyer_id/:seller_id', (req, res, next) => {
 
     const { buyer_id, seller_id } = req.params
@@ -20,9 +19,7 @@ router.put('/create/:buyer_id/:seller_id', (req, res, next) => {
 
             return Promise.all(promises)
         })
-        .then(values => {
-            res.status(200).json(values)
-        })
+        .then(values => res.status(200).json(values))
         .catch(err => next(err))
 })
 
@@ -49,7 +46,7 @@ router.put('/add-message/:conversation_id/:user_id', (req, res, next) => {
         .then(message => {
             Conversation
                 .findByIdAndUpdate(conversation_id, { $addToSet: { messages: message._id } }, { new: true })
-                .then(user => { res.status(200).json(user) })
+                .then(response => res.status(200).json(response))
                 .catch(err => next(err))
         })
         .catch(err => next(err))
@@ -64,9 +61,7 @@ router.get('/conversation/:conversation_id', (req, res, next) => {
         .findById(conversation_id)
         .populate('messages')
         .select({ message: 1 })
-        .then(response => {
-            res.json(response)
-        })
+        .then(conversation => res.json(conversation))
         .catch(err => next(err))
 })
 
