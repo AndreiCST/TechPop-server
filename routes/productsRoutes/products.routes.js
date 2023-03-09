@@ -64,12 +64,12 @@ router.post('/delete/:product_id', (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.get('/:id', (req, res, next) => {
+router.get('/:product_id', (req, res, next) => {
 
-    const { id } = req.params
+    const { product_id } = req.params
 
     Product
-        .findById(id)
+        .findById(product_id)
         .then(product => res.status(200).json(product))
         .catch(err => next(err))
 })

@@ -1,8 +1,8 @@
 const router = require("express").Router()
 
 const bcrypt = require('bcryptjs')
-const User = require('./../../models/User.model')
-const Wallet = require('./../../models/Wallet.model')
+const User = require('../../models/User.model')
+const Wallet = require('../../models/Wallet.model')
 const saltRounds = 10
 
 const jwt = require('jsonwebtoken')
@@ -10,7 +10,7 @@ const { verifyToken } = require("../../middlewares/verifyToken")
 
 router.post('/signup', (req, res, next) => {
 
-    const { email, password, firstName, lastName } = req.body
+    const { email, password, firstName, lastName, avatar } = req.body
 
     if (password.length < 2) {
         res.status(400).json({ message: 'Password must have at least 3 characters' })
@@ -37,7 +37,7 @@ router.post('/signup', (req, res, next) => {
             const salt = bcrypt.genSaltSync(saltRounds)
             const hashedPassword = bcrypt.hashSync(password, salt)
 
-            return User.create({ email, password: hashedPassword, firstName, lastName, wallet: promWallet._id })
+            return User.create({ email, password: hashedPassword, firstName, lastName, wallet: promWallet._id, avatar })
         })
         .then(user => res.status(201).json(user))
         .catch(err => next(err))
@@ -46,11 +46,11 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
 
-    const { email, password } = req.body;
+    const { email, password } = req.body
 
     if (email === '' || password === '') {
-        res.status(400).json({ message: "Provide email and password." });
-        return;
+        res.status(400).json({ message: "Provide email and password." })
+        return
     }
 
     User
@@ -59,12 +59,12 @@ router.post('/login', (req, res, next) => {
 
             if (!foundUser) {
                 res.status(401).json({ message: "User not found." })
-                return;
+                return
             }
 
             if (bcrypt.compareSync(password, foundUser.password)) {
 
-                const { _id, email, firstName, lastName } = foundUser;
+                const { _id, email, firstName, lastName } = foundUser
                 const payload = { _id, email, firstName, lastName }
 
                 const authToken = jwt.sign(
@@ -76,11 +76,11 @@ router.post('/login', (req, res, next) => {
                 res.status(200).json({ authToken })
             }
             else {
-                res.status(401).json({ message: "Incorrect password" });
+                res.status(401).json({ message: "Incorrect password" })
             }
 
         })
-        .catch(err => next(err));
+        .catch(err => next(err))
 })
 
 

@@ -1,7 +1,7 @@
 const router = require('express').Router()
-const User = require('./../../models/User.model')
-const Valoration = require('./../../models/Valoration.model')
-const average = require('./../../utils/average')
+const User = require('../../models/User.model')
+const Valoration = require('../../models/Valoration.model')
+const average = require('../../utils/average')
 
 router.post('/create/:product_id/:user_id/:reviewer_id', (req, res, next) => {
     const { user_id, product_id, reviewer_id } = req.params

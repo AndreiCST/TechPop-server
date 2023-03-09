@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const Subcategory = require('./../../models/Subcategory.model')
+const Subcategory = require('../../models/Subcategory.model')
 
 router.post('/subcategory/create', (req, res, next) => {
 

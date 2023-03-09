@@ -1,14 +1,10 @@
 const router = require('express').Router()
-const User = require('./../../models/User.model')
-const Conversation = require('./../../models/Conversation.model')
-const Message = require('./../../models/Message.model')
+const User = require('../../models/User.model')
+const Conversation = require('../../models/Conversation.model')
+const Message = require('../../models/Message.model')
 const { response } = require('express')
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> miguel
 router.put('/create/:buyer_id/:seller_id', (req, res, next) => {
 
     const { buyer_id, seller_id } = req.params
@@ -23,13 +19,7 @@ router.put('/create/:buyer_id/:seller_id', (req, res, next) => {
 
             return Promise.all(promises)
         })
-<<<<<<< HEAD
-        .then(values => {
-            res.status(200).json(values)
-        })
-=======
         .then(values => res.status(200).json(values))
->>>>>>> miguel
         .catch(err => next(err))
 })
 
@@ -56,11 +46,7 @@ router.put('/add-message/:conversation_id/:user_id', (req, res, next) => {
         .then(message => {
             Conversation
                 .findByIdAndUpdate(conversation_id, { $addToSet: { messages: message._id } }, { new: true })
-<<<<<<< HEAD
                 .then(user => { res.status(200).json(user) })
-=======
-                .then(response => res.status(200).json(response))
->>>>>>> miguel
                 .catch(err => next(err))
         })
         .catch(err => next(err))
@@ -75,13 +61,7 @@ router.get('/conversation/:conversation_id', (req, res, next) => {
         .findById(conversation_id)
         .populate('messages')
         .select({ message: 1 })
-<<<<<<< HEAD
-        .then(response => {
-            res.json(response)
-        })
-=======
-        .then(conversation => res.json(conversation))
->>>>>>> miguel
+        .then(conversation => res.status(200).json(conversation))
         .catch(err => next(err))
 })
 
