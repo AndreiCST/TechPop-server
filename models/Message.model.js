@@ -4,11 +4,7 @@ const messageSchema = new Schema({
 
     message: {
         type: String,
-<<<<<<< HEAD
-        required: true
-=======
         required: [true, 'Necesita un mensaje']
->>>>>>> miguel
     },
     sender: {
         type: Schema.Types.ObjectId,

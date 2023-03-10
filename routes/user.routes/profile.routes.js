@@ -11,7 +11,8 @@ router.get('/:user_id', (req, res, next) => {
 
     User
         .findById(user_id)
-        .then((user) => res.status(200).json(user))
+        .populate()
+        .then(user => res.status(200).json(user))
         .catch(err => next(err))
 })
 

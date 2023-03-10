@@ -21,13 +21,13 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'La contraseña de usuario es obligatoria']
     },
-    // location: {
-    //     type: {
-    //         type: String,
-    //         required: true
-    //     },
-    //     coordinates: [Number]
-    // },
+    location: {
+        type: {
+            type: String,
+            required: true
+        },
+        coordinates: [Number]
+    },
     valorations: {
         avgValoration: {
             type: Number,
