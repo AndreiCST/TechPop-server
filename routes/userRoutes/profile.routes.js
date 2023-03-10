@@ -12,6 +12,9 @@ router.get('/:user_id', (req, res, next) => {
     User
         .findById(user_id)
         .select({
+            firstName: 1,
+            lastName: 1,
+            avatar: 1,
             valorations: 1,
             favouriteProducts: 1,
             favouriteSellers: 1,
@@ -21,7 +24,7 @@ router.get('/:user_id', (req, res, next) => {
             wallet: 1,
             conversations: 1,
         })
-        .populate('valorations')
+        .populate('valorations.allValorations')
         .populate('favouriteProducts')
         .populate('favouriteSellers')
         .populate('sellingProducts')
