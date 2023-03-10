@@ -70,6 +70,7 @@ router.get('/:product_id', (req, res, next) => {
 
     Product
         .findById(product_id)
+        .populate('owner')
         .then(product => res.status(200).json(product))
         .catch(err => next(err))
 })
