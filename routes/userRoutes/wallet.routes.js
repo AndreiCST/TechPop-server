@@ -1,8 +1,8 @@
 const router = require('express').Router()
-const Wallet = require('./../../models/Wallet.model')
-const User = require('./../../models/User.model')
-const Transaction = require('./../../models/Transaction.model')
-const Product = require('./../../models/Product.model')
+const Wallet = require('../../models/Wallet.model')
+const User = require('../../models/User.model')
+const Transaction = require('../../models/Transaction.model')
+const Product = require('../../models/Product.model')
 
 
 router.get('/:user_id', (req, res, next) => {

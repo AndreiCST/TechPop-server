@@ -1,7 +1,7 @@
 const router = require('express').Router()
-const User = require('./../../models/User.model')
-const Conversation = require('./../../models/Conversation.model')
-const Message = require('./../../models/Message.model')
+const User = require('../../models/User.model')
+const Conversation = require('../../models/Conversation.model')
+const Message = require('../../models/Message.model')
 const { response } = require('express')
 
 
@@ -61,7 +61,7 @@ router.get('/conversation/:conversation_id', (req, res, next) => {
         .findById(conversation_id)
         .populate('messages')
         .select({ message: 1 })
-        .then(conversation => res.json(conversation))
+        .then(conversation => res.status(200).json(conversation))
         .catch(err => next(err))
 })
 

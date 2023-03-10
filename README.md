@@ -2,20 +2,16 @@
 |--------|-----------------------------------------------------------------------|----------------------------------------------------------------|
 | GET    | /products/get-products                                                | Busca productos, establece condiciones a traves de las queries |
 | GET    | /products/details/:id                                                 | Trae un producto en especifico                                 |
-| GET    | /products/category                                                    | Trae las categorias                                            |
-| GET    | /products/subcategory                                                 | Trae las subcategorias                                         |
+| GET   x| /products/category                                                    | Trae las categorias                                            |
+| GET   x| /products/subcategory                                                 | Trae las subcategorias                                         |
 | POST   | /products/create-product                                              | Crea un nuevo producto a la base de datos                      |
 | POST   | /products/edit/:id                                                    | Edita un producto en especifico                                |
 | POST   | /products/delete/:id                                                  | Borra un producto en especifico                                |
-| GET    | /products/category/create                                             | Crea una categoria                                             |
-| GET    | /products/subcategory/create                                          | Crea una subcategoria                                          |
+| GET   x| /products/category/create                                             | Crea una categoria                                             |
+| GET   x| /products/subcategory/create                                          | Crea una subcategoria                                          |
 |--------|-----------------------------------------------------------------------|----------------------------------------------------------------|
 | GET   x| /user/profile/:user_id                                                | Informacion basica del usuario                                 |
-<<<<<<< HEAD
-| GET   x| /user/conversations/:user_id                                          | Conversaciones del usuario                                     |
-=======
 | GET   x| /user/conversations/conversation/:user_id                             | Conversaciones del usuario                                     |
->>>>>>> miguel
 | GET   x| /user/valorations/:user_id                                            | Valoraciones del usuario                                       |
 | GET   x| /user/traded/selling/:user_id                                         | Productos en venta del usuario                                 |
 | GET   x| /user/traded/sold/:user_id                                            | Productos vendidos del usuario                                 |
@@ -33,11 +29,7 @@
 | POST  x| /user/favourites/favouritesellers/delete/:user_id                     | Elimina vendedor favorito                                      |
 | POST  x| /user/favourites/favouritesellers/add/:user_id                        | Añade vendedor favorito                                        |
 | POST  x| /user/conversations/create/:buyer_id/:seller_id                       | Crea conversacion                                              |
-<<<<<<< HEAD
 | POST  x| /user/conversations/add-message/:user_id/:conversation_id             | Añade mensaje a conversacion                                   |
-=======
-| POST  x| /user/conversations/add-message/:conversation_id/:user_id             | Añade mensaje a conversacion                                   |
->>>>>>> miguel
 | POST  x| /user/conversations/delete/:conversation_id                           | Elimina conversacion                                           |
 | POST  x| /user/valorations/create/:product_id/:user_id                         | Crea valoracion                                                |
 | PUT   x| /user/traded/selling/add/:user_id/:product_id                         | Añade un producto en venta                                     |
@@ -48,6 +40,6 @@
 | POST  x| /user/profile/edit/:id                                                | Edita un usuario en especifico                                 |
 | POST  x| /user/profile/delete/:id                                              | Borra un usuario en especifico                                 |
 |--------|-----------------------------------------------------------------------|----------------------------------------------------------------|
-| GET    | /verify                                                               | verifica la cuenta                                             |
-| POST   | /signup                                                               | crea nuevo usuario                                             |
-| POST   | /login                                                                | conecta al usuario                                             |
+| GET   x| /verify                                                               | verifica la cuenta                                             |
+| POST  x| /signup                                                               | crea nuevo usuario                                             |
+| POST  x| /login                                                                | conecta al usuario                                             |

@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const User = require('./../../models/User.model')
+const User = require('../../models/User.model')
 
 router.get('/selling/:user_id', (req, res, next) => {
     const { user_id } = req.params
