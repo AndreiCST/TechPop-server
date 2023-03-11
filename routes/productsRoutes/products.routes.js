@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const Product = require('../../models/Product.model')
+const User = require('../../models/User.model')
 
 router.get('/get-products', (req, res, next) => {
 
@@ -18,17 +19,23 @@ router.post('/create-product/:user_id', (req, res, next) => {
         name,
         description,
         price,
+        stateOfProduct,
         images,
         category,
         owner: user_id
     }
 
-    stateOfProduct ? newProd.stateOfProduct = stateOfProduct : undefined
+    // stateOfProduct ? newProd.stateOfProduct = stateOfProduct : undefined
     subcategory ? newProd.subcategory = subcategory : undefined
 
     Product
         .create(newProd)
-        .then(() => res.status(200).json('El producto se ha creado'))
+        .then(product => {
+            User
+                .findByIdAndUpdate(user_id, { $addToSet: { sellingProducts: product._id } }, { new: true })
+                .then(res.status(200).json('El producto se ha creado'))
+                .catch(err => next(err))
+        })
         .catch(err => next(err))
 })
 
