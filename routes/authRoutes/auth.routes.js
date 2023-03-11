@@ -13,7 +13,7 @@ router.post('/signup', (req, res, next) => {
     const { email, password, firstName, lastName, avatar } = req.body
 
     if (password.length < 2) {
-        res.status(400).json({ message: 'Password must have at least 3 characters' })
+        res.status(400).json({ errorMessages: 'Password must have at least 3 characters' })
         return
     }
 
@@ -30,7 +30,7 @@ router.post('/signup', (req, res, next) => {
             const promWallet = results[1]
 
             if (promUser) {
-                res.status(400).json({ message: "User already exists." })
+                res.status(400).json({ errorMessages: "User already exists." })
                 return
             }
 
@@ -49,7 +49,7 @@ router.post('/login', (req, res, next) => {
     const { email, password } = req.body
 
     if (email === '' || password === '') {
-        res.status(400).json({ message: "Provide email and password." })
+        res.status(400).json({ errorMessages: "Provide email and password." })
         return
     }
 
@@ -58,7 +58,7 @@ router.post('/login', (req, res, next) => {
         .then((foundUser) => {
 
             if (!foundUser) {
-                res.status(401).json({ message: "User not found." })
+                res.status(401).json({ errorMessages: "User not found." })
                 return
             }
 
@@ -76,7 +76,7 @@ router.post('/login', (req, res, next) => {
                 res.status(200).json({ authToken })
             }
             else {
-                res.status(401).json({ message: "Incorrect password" })
+                res.status(401).json({ errorMessages: "Incorrect password" })
             }
 
         })
