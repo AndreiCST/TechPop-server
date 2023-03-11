@@ -3,6 +3,19 @@ const User = require('../../models/User.model')
 const Conversation = require('../../models/Conversation.model')
 const Message = require('../../models/Message.model')
 
+
+router.get('/conversation-messages/:conversation_id', (req, res, next) => {
+
+    const { conversation_id } = req.params
+
+    Conversation
+        .findById(conversation_id)
+        .populate('messages')
+        .then(result => res.status(200).json(result))
+        .catch(err => next(err))
+})
+
+
 router.put('/create/:buyer_id/:seller_id', (req, res, next) => {
 
     const { buyer_id, seller_id } = req.params
@@ -24,18 +37,6 @@ router.put('/create/:buyer_id/:seller_id', (req, res, next) => {
 })
 
 
-router.get('/:user_id', (req, res, next) => {
-
-    const { user_id } = req.params
-
-    User
-        .findById(user_id)
-        .select({ conversations: 1 })
-        .then(conversations => res.status(200).json(conversations))
-        .catch(err => next(err))
-})
-
-
 router.put('/add-message/:conversation_id/:user_id', (req, res, next) => {
 
     const { conversation_id, user_id } = req.params
@@ -44,24 +45,9 @@ router.put('/add-message/:conversation_id/:user_id', (req, res, next) => {
     Message
         .create({ message, sender: user_id })
         .then(message => {
-            Conversation
-                .findByIdAndUpdate(conversation_id, { $addToSet: { messages: message._id } }, { new: true })
-                .then(response => res.status(200).json(response))
-                .catch(err => next(err))
+            return Conversation.findByIdAndUpdate(conversation_id, { $addToSet: { messages: message._id } }, { new: true })
         })
-        .catch(err => next(err))
-})
-
-
-router.get('/conversation/:conversation_id', (req, res, next) => {
-
-    const { conversation_id } = req.params
-
-    Conversation
-        .findById(conversation_id)
-        .populate('messages')
-        .select({ message: 1 })
-        .then(conversation => res.status(200).json(conversation))
+        .then()
         .catch(err => next(err))
 })
 
