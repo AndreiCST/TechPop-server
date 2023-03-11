@@ -22,11 +22,13 @@ router.post('/create-product/:user_id', (req, res, next) => {
         stateOfProduct,
         images,
         category,
+        subcategory,
         owner: user_id
     }
 
     // stateOfProduct ? newProd.stateOfProduct = stateOfProduct : undefined
-    subcategory ? newProd.subcategory = subcategory : undefined
+    // category ? newProd.category = category : undefined
+    // subcategory ? newProd.subcategory = subcategory : undefined
 
     Product
         .create(newProd)
@@ -52,8 +54,8 @@ router.post('/edit/:product_id', (req, res, next) => {
     stateOfProduct ? updateProduct.stateOfProduct = stateOfProduct : undefined
     category ? updateProduct.category = category : undefined
 
-    // subcategory ? updateProduct.subcategory = subcategory : undefined
-    // images ? updateProduct.images = images : undefined
+    subcategory ? updateProduct.subcategory = subcategory : undefined
+    images ? updateProduct.images = images : undefined
 
     Product
         .findByIdAndUpdate(product_id, updateProduct)
@@ -81,5 +83,29 @@ router.get('/:product_id', (req, res, next) => {
         .then(product => res.status(200).json(product))
         .catch(err => next(err))
 })
+
+router.put('/addToFav/:product_id', (req, res, next) => {
+
+    const { product_id } = req.params
+    const { user_id } = req.body
+
+    User
+        .findByIdAndUpdate(user_id, { $addToSet: { favouriteProducts: product_id } })
+        .then(() => res.status(200).json('El producto se ha añadido a favoritos corectamente'))
+        .catch(err => next(err))
+})
+
+// router.put('/removeFromFav/:product_id', (req, res, next) => {
+
+//     const { product_id } = req.params
+//     const { user_id } = req.body
+
+
+
+//     User
+//         .findByIdAndUpdate(user_id, { $pull: { favouriteProducts: product_id } })
+//         .then(() => res.status(200).json('El producto se ha eliminado de favoritos corectamente'))
+//         .catch(err => next(err))
+// })
 
 module.exports = router

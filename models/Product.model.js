@@ -26,27 +26,32 @@ const productSchema = new Schema({
     price: {
         type: Number,
         min: 0,
-        required: [true, 'el producto necesita un precio'],
+        required: [true, 'El producto necesita un precio'],
     },
     stateOfProduct: {
         type: String,
-        enum: ['NEW', 'ALMOSTNEW', 'USED', 'VERYUSED', 'NOTSPECIFIED'],
-        default: 'NOTSPECIFIED'
+        enum: ['NEW', 'ALMOSTNEW', 'USED', 'VERYUSED'],
+        required: [true, 'El producto necesita el estado del producto']
     },
     inSale: {
         type: Boolean,
         default: true
     },
     category: {
-        type: String
+        type: String,
+        enum: ['Informatica', 'Electrodomesticos', 'Telefonia', 'Consola', 'Otros'],
+        required: [true, 'El producto necesita una categoria']
         // type: Schema.Types.ObjectId,
         // ref: 'Category',
         // required: [true, 'Necesita una categoria']
     },
-    subcategory: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Subcategory',
-    }],
+    subcategory: {
+        type: String,
+        enum: ['Producto', 'Accesorio', 'Videojuego', 'Otros'],
+        required: [true, 'El producto necesita una subcategoria']
+        // type: Schema.Types.ObjectId,
+        // ref: 'Subcategory',
+    },
     buyRequest: [{
         type: Schema.Types.ObjectId,
         ref: 'User',
