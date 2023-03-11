@@ -10,6 +10,14 @@ cloudinary.config({
 })
 
 
-const storage = new CloudinaryStorage({ cloudinary })
+const storage = new CloudinaryStorage(
+    {
+        cloudinary,
+        params: {
+            allowed_formats: ["jpg", "png"],
+            folder: "movie-gallery",
+            multiple: true
+        }
+    })
 
 module.exports = multer({ storage })
