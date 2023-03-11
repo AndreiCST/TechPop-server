@@ -4,8 +4,8 @@ const saltRounds = 10
 
 const User = require('../../models/User.model')
 
-
-router.get('/:user_id', (req, res, next) => {
+// toda la info del usuario conectado
+router.get('/all-info/:user_id', (req, res, next) => {
 
     const { user_id } = req.params
 
@@ -36,6 +36,40 @@ router.get('/:user_id', (req, res, next) => {
         .catch(err => next(err))
 })
 
+//la info necesaria para la conversacion
+router.get('/conv-info/:user_id', (req, res, next) => {
+
+    const { user_id } = req.params
+
+    User
+        .findById(user_id)
+        .select({
+            firstName: 1,
+            lastName: 1,
+            avatar: 1,
+        })
+        .then(user => res.status(200).json(user))
+        .catch(err => next(err))
+})
+
+//la info necesaria para ver el perfil de otro
+router.get('/reduced-info/:user_id', (req, res, next) => {
+
+    const { user_id } = req.params
+
+    User
+        .findById(user_id)
+        .select({
+            firstName: 1,
+            lastName: 1,
+            avatar: 1,
+            valorations: 1,
+            sellingProducts: 1,
+        })
+        .populate('valorations.allValorations')
+        .then(user => res.status(200).json(user))
+        .catch(err => next(err))
+})
 
 router.put('/edit/:user_id', (req, res, next) => {
 

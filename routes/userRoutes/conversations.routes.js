@@ -2,24 +2,24 @@ const router = require('express').Router()
 const User = require('../../models/User.model')
 const Conversation = require('../../models/Conversation.model')
 const Message = require('../../models/Message.model')
-const { response } = require('express')
-
 
 router.put('/create/:buyer_id/:seller_id', (req, res, next) => {
 
     const { buyer_id, seller_id } = req.params
 
-    Conversation
-        .create({ messages: [], buyer: buyer_id, seller: seller_id })
-        .then(conversation => {
 
-            const editBuyer = User.findByIdAndUpdate(buyer_id, { $addToSet: { conversations: conversation._id } }, { new: true })
-            const editSeller = User.findByIdAndUpdate(seller_id, { $addToSet: { conversations: conversation._id } }, { new: true })
+    Conversation
+        .create({ participants: [buyer_id, seller_id] })
+        .then(({ _id }) => {
+
+            const editBuyer = User.findByIdAndUpdate(buyer_id, { $addToSet: { conversations: _id } }, { new: true })
+            const editSeller = User.findByIdAndUpdate(seller_id, { $addToSet: { conversations: _id } }, { new: true })
+
             const promises = [editBuyer, editSeller]
 
             return Promise.all(promises)
         })
-        .then(values => res.status(200).json(values))
+        .then(() => res.status(200).json('Conversacion creada'))
         .catch(err => next(err))
 })
 

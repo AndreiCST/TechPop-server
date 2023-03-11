@@ -8,13 +8,11 @@ const conversationSchema = new Schema({
             ref: 'Message'
         }]
     },
-    buyer: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    seller: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
+    participants: {
+        type: [{
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }]
     }
 },
     {
