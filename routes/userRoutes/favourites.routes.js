@@ -3,14 +3,17 @@ const User = require('../../models/User.model')
 
 
 //FAVOURITE PRODUCTS
-router.get('/favouriteproducts/:user_id', (req, res, next) => {
+router.get('/is-favourite/:user_id/:product_id', (req, res, next) => {
 
-    const { user_id } = req.params
+    const { user_id, product_id } = req.params
 
     User
         .findById(user_id)
-        .populate("favouriteProducts")
-        .then(user => res.status(200).json(user.favouriteProducts))
+        .select({ favouriteProducts: 1 })
+        .then(({ favouriteProducts }) => {
+            return favouriteProducts.includes(product_id)
+        })
+        .then(result => res.status(200).json(result))
         .catch(err => next(err))
 })
 
@@ -52,7 +55,7 @@ router.get('/favouritesellers/:user_id', (req, res, next) => {
         .catch(err => next(err))
 })
 
-//ADD FAVOURITE PRODUCTS 
+//ADD FAVOURITE SELLERS 
 router.put('/addToFavSel/:seller_id', (req, res, next) => {
 
     const { seller_id } = req.params
@@ -64,7 +67,7 @@ router.put('/addToFavSel/:seller_id', (req, res, next) => {
         .catch(err => next(err))
 })
 
-//DELETE FAVOURITE PRODUCTS
+//DELETE FAVOURITE SELLERS
 router.delete('/removeFromFavSel/:product_id', (req, res, next) => {
 
     const { seller_id } = req.params
