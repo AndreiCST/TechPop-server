@@ -74,13 +74,13 @@ router.get('/reduced-info/:user_id', (req, res, next) => {
 router.put('/edit/:user_id', (req, res, next) => {
 
     const { user_id } = req.params
-    const { firstName, lastName, email, password, avatar } = req.body
+    const { firstName, lastName, email, avatar } = req.body
 
-    const salt = bcrypt.genSaltSync(saltRounds)
-    const hashedPassword = bcrypt.hashSync(password, salt)
+    // const salt = bcrypt.genSaltSync(saltRounds)
+    // const hashedPassword = bcrypt.hashSync(password, salt)
 
     User
-        .findByIdAndUpdate(user_id, { firstName, lastName, email, password: hashedPassword, avatar }, { new: true })
+        .findByIdAndUpdate(user_id, { firstName, lastName, email, avatar }, { new: true })
         .then(user => res.status(200).json(`El usuario ${user.firstName} ${user.lastName} se ha editado`))
         .catch(err => next(err))
 })

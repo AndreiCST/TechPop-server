@@ -3,7 +3,7 @@ const User = require('../../models/User.model')
 
 
 //FAVOURITE PRODUCTS
-router.get('/is-favourite/:user_id/:product_id', (req, res, next) => {
+router.get('/is-favourite-product/:user_id/:product_id', (req, res, next) => {
 
     const { user_id, product_id } = req.params
 
@@ -18,10 +18,9 @@ router.get('/is-favourite/:user_id/:product_id', (req, res, next) => {
 })
 
 //ADD FAVOURITE PRODUCTS 
-router.put('/addToFavProd/:product_id', (req, res, next) => {
+router.put('/addToFavProd/:user_id/:product_id', (req, res, next) => {
 
-    const { product_id } = req.params
-    const { user_id } = req.body
+    const { user_id, product_id } = req.params
 
     User
         .findByIdAndUpdate(user_id, { $addToSet: { favouriteProducts: product_id } })
@@ -30,10 +29,9 @@ router.put('/addToFavProd/:product_id', (req, res, next) => {
 })
 
 //DELETE FAVOURITE PRODUCTS
-router.delete('/removeFromFavPro/:product_id', (req, res, next) => {
+router.put('/removeFromFavProd/:user_id/:product_id', (req, res, next) => {
 
-    const { product_id } = req.params
-    const { user_id } = req.body
+    const { user_id, product_id } = req.params
 
     User
         .findByIdAndUpdate(user_id, { $pull: { favouriteProducts: product_id } }, { new: true })
@@ -44,22 +42,24 @@ router.delete('/removeFromFavPro/:product_id', (req, res, next) => {
 
 
 //FAVOURITE SELLERS
-router.get('/favouritesellers/:user_id', (req, res, next) => {
+router.get('/is-favourite-seller/:user_id/:seller_id', (req, res, next) => {
 
-    const { user_id } = req.params
+    const { user_id, seller_id } = req.params
 
     User
         .findById(user_id)
-        .populate("favouriteSellers")
-        .then(user => res.status(200).json(user.favouriteSellers))
+        .select({ favouriteSellers: 1 })
+        .then(({ favouriteSellers }) => {
+            return favouriteSellers.includes(seller_id)
+        })
+        .then(result => res.status(200).json(result))
         .catch(err => next(err))
 })
 
 //ADD FAVOURITE SELLERS 
-router.put('/addToFavSel/:seller_id', (req, res, next) => {
+router.put('/addToFavSel/:user_id/:seller_id', (req, res, next) => {
 
-    const { seller_id } = req.params
-    const { user_id } = req.body
+    const { user_id, seller_id } = req.params
 
     User
         .findByIdAndUpdate(user_id, { $addToSet: { favouriteSellers: seller_id } })
@@ -68,10 +68,9 @@ router.put('/addToFavSel/:seller_id', (req, res, next) => {
 })
 
 //DELETE FAVOURITE SELLERS
-router.delete('/removeFromFavSel/:product_id', (req, res, next) => {
+router.put('/removeFromFavSel/:user_id/:seller_id', (req, res, next) => {
 
-    const { seller_id } = req.params
-    const { user_id } = req.body
+    const { user_id, seller_id } = req.params
 
     User
         .findByIdAndUpdate(user_id, { $pull: { favouriteSellers: seller_id } }, { new: true })
