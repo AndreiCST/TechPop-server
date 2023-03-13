@@ -47,7 +47,7 @@ router.put('/add-message/:conversation_id/:user_id', (req, res, next) => {
         .then(message => {
             return Conversation.findByIdAndUpdate(conversation_id, { $addToSet: { messages: message._id } }, { new: true })
         })
-        .then()
+        .then(conversation => res.status(200).json(conversation))
         .catch(err => next(err))
 })
 
