@@ -84,28 +84,5 @@ router.get('/:product_id', (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.put('/addToFav/:product_id', (req, res, next) => {
-
-    const { product_id } = req.params
-    const { user_id } = req.body
-
-    User
-        .findByIdAndUpdate(user_id, { $addToSet: { favouriteProducts: product_id } })
-        .then(() => res.status(200).json('El producto se ha añadido a favoritos corectamente'))
-        .catch(err => next(err))
-})
-
-// router.put('/removeFromFav/:product_id', (req, res, next) => {
-
-//     const { product_id } = req.params
-//     const { user_id } = req.body
-
-
-
-//     User
-//         .findByIdAndUpdate(user_id, { $pull: { favouriteProducts: product_id } })
-//         .then(() => res.status(200).json('El producto se ha eliminado de favoritos corectamente'))
-//         .catch(err => next(err))
-// })
 
 module.exports = router
