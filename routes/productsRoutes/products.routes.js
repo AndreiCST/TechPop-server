@@ -41,29 +41,29 @@ router.post('/create-product/:user_id', (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.post('/edit/:product_id', (req, res, next) => {
+router.put('/edit/:product_id', (req, res, next) => {
 
     const { product_id } = req.params
-    const { name, description, price, stateOfProduct, images, category, subcategory } = req.body
+    const { name, description, price, stateOfProduct, category, subcategory } = req.body
 
-    const updateProduct = {}
+    // const productData = {}
 
-    name ? updateProduct.name = name : undefined
-    description ? updateProduct.description = description : undefined
-    price ? updateProduct.price = price : undefined
-    stateOfProduct ? updateProduct.stateOfProduct = stateOfProduct : undefined
-    category ? updateProduct.category = category : undefined
+    // name ? productData.name = name : undefined
+    // description ? productData.description = description : undefined
+    // price ? productData.price = price : undefined
+    // stateOfProduct ? productData.stateOfProduct = stateOfProduct : undefined
+    // category ? productData.category = category : undefined
 
-    subcategory ? updateProduct.subcategory = subcategory : undefined
-    images ? updateProduct.images = images : undefined
+    // subcategory ? productData.subcategory = subcategory : undefined
+    // images ? productData.images = images : undefined
 
     Product
-        .findByIdAndUpdate(product_id, updateProduct)
+        .findByIdAndUpdate(product_id, { name, description, price, stateOfProduct, category, subcategory })
         .then(() => res.status(200).json('El producto se ha editado'))
         .catch(err => next(err))
 })
 
-router.post('/delete/:product_id', (req, res, next) => {
+router.delete('/delete/:product_id', (req, res, next) => {
 
     const { product_id } = req.params
 
