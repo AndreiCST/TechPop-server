@@ -2,7 +2,7 @@ const router = require('express').Router()
 const User = require('../../models/User.model')
 
 
-//FAVOURITE PRODUCTS
+//IF IS FAVOURITE PRODUCT RETURN TRUE
 router.get('/is-favourite-product/:user_id/:product_id', (req, res, next) => {
 
     const { user_id, product_id } = req.params
@@ -41,7 +41,7 @@ router.put('/removeFromFavProd/:user_id/:product_id', (req, res, next) => {
 
 
 
-//FAVOURITE SELLERS
+//IF IS FAVOURITE SELLER RETURN TRUE
 router.get('/is-favourite-seller/:user_id/:seller_id', (req, res, next) => {
 
     const { user_id, seller_id } = req.params
@@ -74,7 +74,7 @@ router.put('/removeFromFavSel/:user_id/:seller_id', (req, res, next) => {
 
     User
         .findByIdAndUpdate(user_id, { $pull: { favouriteSellers: seller_id } }, { new: true })
-        .then((user) => res.status(200).json('El vendedor se ha retirado de favoritos corectamente'))
+        .then(() => res.status(200).json('El vendedor se ha retirado de favoritos corectamente'))
         .catch(err => next(err))
 })
 

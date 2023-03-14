@@ -24,7 +24,6 @@ router.get('/all-info/:user_id', (req, res, next) => {
             wallet: 1,
             conversations: 1,
         })
-        .populate('valorations.allValorations')
         .populate('favouriteProducts')
         .populate('favouriteSellers')
         .populate('sellingProducts')
