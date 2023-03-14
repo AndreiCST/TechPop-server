@@ -4,6 +4,22 @@ const Conversation = require('../../models/Conversation.model')
 const Message = require('../../models/Message.model')
 
 
+router.get('/verify-if-exist/:user_id/:seller_id', (req, res, next) => {
+
+    const { user_id, seller_id } = req.params
+
+    Conversation
+        .find({ participants: { $all: [user_id, seller_id] } })
+        .then(result => {
+            if (result.length > 0) {
+                res.status(200).json(result[0]._id)
+            } else {
+                res.json('false')
+            }
+        })
+        .catch(err => next(err))
+})
+
 router.get('/conversation-messages/:conversation_id', (req, res, next) => {
 
     const { conversation_id } = req.params
@@ -61,6 +77,5 @@ router.delete('/delete/:user_id/:conversation_id', (req, res, next) => {
         .then((user) => res.status(200).json(user))
         .catch(err => next(err))
 })
-
 
 module.exports = router
