@@ -39,7 +39,7 @@ const productSchema = new Schema({
     },
     category: {
         type: String,
-        enum: ['Informatica', 'Electrodomesticos', 'Telefonia', 'Consola', 'Otros'],
+        enum: ['Componentes', 'Ordenadores', 'Telefonia', 'Gaming', 'Tablets', 'Audio y foto'],
         required: [true, 'El producto necesita una categoria']
         // type: Schema.Types.ObjectId,
         // ref: 'Category',
