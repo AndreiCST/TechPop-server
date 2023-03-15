@@ -55,7 +55,11 @@ const productSchema = new Schema({
     buyRequest: [{
         type: Schema.Types.ObjectId,
         ref: 'User',
-    }]
+    }],
+    activeProduct: {
+        type: Boolean,
+        default: true
+    }
 },
     {
         timestamps: true
