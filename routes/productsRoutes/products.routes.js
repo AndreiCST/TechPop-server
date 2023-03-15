@@ -11,6 +11,21 @@ router.get('/get-products', (req, res, next) => {
         .catch(err => next(err))
 })
 
+router.get('/:searchString', (req, res, next) => {
+
+    const { searchString } = req.params
+
+    Product
+        .find({
+            $or: [
+                { name: { $regex: searchString, $options: 'i' } },
+                { description: { $regex: searchString, $options: 'i' } }
+            ]
+        })
+        .then(products => res.status(200).json(products))
+        .catch(err => console.log(err))
+})
+
 router.post('/create-product/:user_id', (req, res, next) => {
     const { user_id } = req.params
     const { name, description, price, stateOfProduct, images, category, subcategory } = req.body
