@@ -9,6 +9,7 @@
 | POST   | /products/delete/:id                                                  | Borra un producto en especifico                                |
 | GET   x| /products/category/create                                             | Crea una categoria                                             |
 | GET   x| /products/subcategory/create                                          | Crea una subcategoria                                          |
+| GET   x| /:searchString                                                        | Busca los objetos que contengan esa palabra                    |
 |--------|-----------------------------------------------------------------------|----------------------------------------------------------------|
 | GET   x| /user/profile/:user_id                                                | Informacion basica del usuario                                 |
 | GET   x| /user/conversations/conversation/:user_id                             | Conversaciones del usuario                                     |
