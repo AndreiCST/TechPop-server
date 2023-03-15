@@ -14,6 +14,7 @@ router.get('/all-info/:user_id', (req, res, next) => {
         .select({
             firstName: 1,
             lastName: 1,
+            email: 1,
             avatar: 1,
             valorations: 1,
             favouriteProducts: 1,
@@ -73,13 +74,10 @@ router.get('/reduced-info/:user_id', (req, res, next) => {
 router.put('/edit/:user_id', (req, res, next) => {
 
     const { user_id } = req.params
-    const { firstName, lastName, email } = req.body                                                     //Falta avatar y password
-
-    // const salt = bcrypt.genSaltSync(saltRounds)
-    // const hashedPassword = bcrypt.hashSync(password, salt)
+    const { firstName, lastName, email, avatar } = req.body                                                     //Falta avatar
 
     User
-        .findByIdAndUpdate(user_id, { firstName, lastName, email, avatar }, { new: true })                              //Falta avatar y password
+        .findByIdAndUpdate(user_id, { firstName, lastName, email, avatar }, { new: true })                              //Falta avatar
         .then(user => res.status(200).json(`El usuario ${user.firstName} ${user.lastName} se ha editado`))
         .catch(err => next(err))
 })
