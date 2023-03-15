@@ -12,7 +12,9 @@ router.get('/verify-if-exist/:user_id/:seller_id', (req, res, next) => {
         .find({ participants: { $all: [user_id, seller_id] } })
         .then(result => {
             if (result.length > 0) {
-                res.status(200).json(result[0]._id)
+                User.findByIdAndUpdate(user_id, { $addToSet: { conversations: result[0]._id } }, { new: true })
+                    .then(() => res.status(200).json(result[0]._id))
+                    .catch(err => next(err))
             } else {
                 res.json('false')
             }
