@@ -11,7 +11,7 @@ router.get('/get-products', (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.get('/:searchString', (req, res, next) => {
+router.get('search/:searchString', (req, res, next) => {
 
     const { searchString } = req.params
 
