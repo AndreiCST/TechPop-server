@@ -3,13 +3,24 @@ const Product = require('../../models/Product.model')
 const User = require('../../models/User.model')
 const Transaction = require('../../models/Transaction.model')
 
+router.get('/get-transaction/:transaction_id', (req, res, next) => {
+    const { transaction_id } = req.params
+
+    Transaction
+        .findById(transaction_id)
+        .populate('buyer')
+        .populate('product')
+        .then(transaction => res.status(200).json(transaction))
+        .catch(err => next(err))
+})
+
 router.post('/start/:product_id/:buyer_id/:seller_id', (req, res, next) => {
 
     const { product_id, buyer_id, seller_id } = req.params
 
     Transaction
-        .create(product_id, buyer_id, seller_id)
-        .then(() => Product.findByIdAndUpdate(product_id, { $addToSet: { buyRequest: buyer_id } }, { new: true }))
+        .create({ product: product_id, buyer: buyer_id, seller: seller_id })
+        .then(transaction => Product.findByIdAndUpdate(product_id, { $addToSet: { buyRequest: transaction._id } }, { new: true }))
         .catch(err => next(err))
 })
 

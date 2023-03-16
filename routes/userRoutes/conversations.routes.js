@@ -4,12 +4,12 @@ const Conversation = require('../../models/Conversation.model')
 const Message = require('../../models/Message.model')
 
 
-router.get('/verify-if-exist/:user_id/:seller_id', (req, res, next) => {
+router.get('/verify-if-exist/:user_id/:seller_id/:product_id', (req, res, next) => {
 
-    const { user_id, seller_id } = req.params
+    const { user_id, seller_id, product_id } = req.params
 
     Conversation
-        .find({ participants: { $all: [user_id, seller_id] } })
+        .find({ participants: { $all: [user_id, seller_id] }, product: product_id })
         .then(result => {
             if (result.length > 0) {
                 User.findByIdAndUpdate(user_id, { $addToSet: { conversations: result[0]._id } }, { new: true })
