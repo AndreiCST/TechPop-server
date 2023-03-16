@@ -24,13 +24,16 @@ router.post('/start/:product_id/:buyer_id/:seller_id', (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.put('/reject/:transaction_id', (req, res, next) => {
+router.put('/reject/:transaction_id/:product_id', (req, res, next) => {
 
-    const { transaction_id } = req.params
+    const { transaction_id, product_id } = req.params
 
     Transaction
         .findByIdAndUpdate(transaction_id, { activeTransaction: false }, { new: true })
-        .then(() => res.status(200).json('Transaccion rechazada'))
+        .then(() => {
+            Product.findByIdAndUpdate(product_id, { $pull: { buyRequest: transaction_id } })
+            res.status(200).json('Transaccion rechazada')
+        })
         .catch(err => next(err))
 })
 
@@ -43,10 +46,12 @@ router.put('/accept/:transaction_id/:product_id/:buyer_id/:seller_id', (req, res
         .then(() => {
 
             const itsBought = User.findByIdAndUpdate(buyer_id, { $addToSet: { purchasedProducts: product_id } }, { new: true })
-            const itsSoled = User.findByIdAndUpdate(seller_id, [
-                { $addToSet: { soldProducts: product_id } },
-                { $pull: { sellingProducts: product_id } }
-            ], { new: true })
+            const itsSoled = User.findByIdAndUpdate(seller_id,
+                {
+                    $addToSet: { soldProducts: product_id },
+                    $pull: { sellingProducts: product_id }
+                }
+                , { new: true })
             const outStock = Product.findByIdAndUpdate(product_id, { inSale: false }, { new: true })
 
             const promises = [itsBought, itsSoled, outStock]
