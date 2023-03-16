@@ -1,3 +1,7 @@
+
+//NO ESTAN EN USO!!!
+
+
 const router = require('express').Router()
 const User = require('../../models/User.model')
 

@@ -52,10 +52,12 @@ const productSchema = new Schema({
         // type: Schema.Types.ObjectId,
         // ref: 'Subcategory',
     },
-    buyRequest: [{
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-    }],
+    buyRequest: {
+        type: [{
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }]
+    },
     activeProduct: {
         type: Boolean,
         default: true
