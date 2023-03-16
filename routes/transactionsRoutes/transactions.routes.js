@@ -43,13 +43,15 @@ router.put('/accept/:transaction_id/:product_id/:buyer_id/:seller_id', (req, res
         .then(() => {
 
             const itsBought = User.findByIdAndUpdate(buyer_id, { $addToSet: { purchasedProducts: product_id } }, { new: true })
-            const itsSoled = User.findByIdAndUpdate(seller_id, [
-                { $addToSet: { soldProducts: product_id } },
-                { $pull: { sellingProducts: product_id } }
-            ], { new: true })
+            const itsSold = User.findByIdAndUpdate(seller_id,
+                {
+                    $addToSet: { soldProducts: product_id },
+                    $pull: { sellingProducts: product_id }
+                }
+                , { new: true })
             const outStock = Product.findByIdAndUpdate(product_id, { inSale: false }, { new: true })
 
-            const promises = [itsBought, itsSoled, outStock]
+            const promises = [itsBought, itsSold, outStock]
 
             return Promise.all(promises)
         })

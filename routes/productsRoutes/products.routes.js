@@ -5,7 +5,7 @@ const User = require('../../models/User.model')
 router.get('/get-products', (req, res, next) => {
 
     Product
-        .find({ activeProduct: true })
+        .find({ activeProduct: true, inSale: true })
         .select({ name: 1, price: 1, images: 1 })
         .then(products => res.status(200).json(products))
         .catch(err => next(err))
