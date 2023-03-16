@@ -21,7 +21,8 @@ router.get('/search/:searchString', (req, res, next) => {
                 { name: { $regex: searchString, $options: 'i' } },
                 { description: { $regex: searchString, $options: 'i' } }
             ],
-            activeProduct: true
+            activeProduct: true,
+            inSale: true
         })
         .then(products => res.status(200).json(products))
         .catch(err => console.log(err))
