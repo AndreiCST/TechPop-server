@@ -31,8 +31,7 @@ router.put('/reject/:transaction_id/:product_id', (req, res, next) => {
     Transaction
         .findByIdAndUpdate(transaction_id, { activeTransaction: false }, { new: true })
         .then(() => {
-            Product.findByIdAndUpdate(product_id, { $pull: { buyRequest: transaction_id } })
-            res.status(200).json('Transaccion rechazada')
+            return Product.findByIdAndUpdate(product_id, { $pull: { buyRequest: transaction_id } })
         })
         .catch(err => next(err))
 })
