@@ -34,13 +34,13 @@ router.get('/conversation-messages/:conversation_id', (req, res, next) => {
 })
 
 
-router.put('/create/:buyer_id/:seller_id', (req, res, next) => {
+router.put('/create/:buyer_id/:seller_id/:product_id', (req, res, next) => {
 
-    const { buyer_id, seller_id } = req.params
+    const { buyer_id, seller_id, product_id } = req.params
 
 
     Conversation
-        .create({ participants: [buyer_id, seller_id] })
+        .create({ participants: [buyer_id, seller_id], product: product_id })
         .then(({ _id }) => {
 
             const editBuyer = User.findByIdAndUpdate(buyer_id, { $addToSet: { conversations: _id } }, { new: true })
