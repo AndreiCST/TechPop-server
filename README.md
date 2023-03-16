@@ -14,8 +14,6 @@
 | GET   x| /user/profile/:user_id                                                | Informacion basica del usuario                                 |
 | GET   x| /user/conversations/conversation/:user_id                             | Conversaciones del usuario                                     |
 | GET   x| /user/valorations/:user_id                                            | Valoraciones del usuario                                       |
-| GET   x| /user/traded/selling/:user_id                                         | Productos en venta del usuario                                 |
-| GET   x| /user/traded/sold/:user_id                                            | Productos vendidos del usuario                                 |
 | GET   x| /user/traded/purchased/:user_id                                       | Productos comprados por el usuario                             |
 | GET    | /user/valorations/:user_id                                            | Valoraciones del usuario                                       |
 | GET   x| /user/favourites/favouriteproducts/:user_id                           | Productos favoritos del usuario                                |

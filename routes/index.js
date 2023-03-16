@@ -12,5 +12,7 @@ router.use('/user', userRoutes)
 const uploadsRoutes = require('./uploadsRoutes/upload.routes')
 router.use('/upload', uploadsRoutes)
 
+const transactionsRoutes = require('./transactionsRoutes/transactions.routes')
+router.use('/transactions', transactionsRoutes)
 
 module.exports = router

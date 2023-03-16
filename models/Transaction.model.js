@@ -16,6 +16,10 @@ const transactionSchema = new Schema({
     product: {
         type: Schema.Types.ObjectId,
         ref: 'Product'
+    },
+    activeTransaction: {
+        type: Boolean,
+        default: true
     }
 },
     {

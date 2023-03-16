@@ -18,4 +18,5 @@ router.use('/wallet', walletRoutes)
 const tradedRoutes = require('./traded.routes')
 router.use('/traded', tradedRoutes)
 
+
 module.exports = router
