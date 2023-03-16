@@ -6,6 +6,9 @@ router.use('/auth', authRoutes)
 const productsRoutes = require('./productsRoutes/products.routes')
 router.use('/products', productsRoutes)
 
+const categoriesRoutes = require('./productsRoutes/categories.routes')
+router.use('/categories', categoriesRoutes)
+
 const userRoutes = require('./userRoutes')
 router.use('/user', userRoutes)
 

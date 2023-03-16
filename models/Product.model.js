@@ -30,7 +30,7 @@ const productSchema = new Schema({
     },
     stateOfProduct: {
         type: String,
-        enum: ['NEW', 'ALMOSTNEW', 'USED', 'VERYUSED'],
+        enum: ['Nuevo', 'Casi nuevo', 'Usado', 'Muy usado'],
         required: [true, 'El producto necesita el estado del producto']
     },
     inSale: {
