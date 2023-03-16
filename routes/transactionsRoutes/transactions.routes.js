@@ -3,11 +3,11 @@ const Product = require('../../models/Product.model')
 const User = require('../../models/User.model')
 const Transaction = require('../../models/Transaction.model')
 
-router.get('/get-transaction/:transaction_id', (req, res, next) => {
-    const { transaction_id } = req.params
-
+router.post('/get-transactions', (req, res, next) => {
+    const { transactions } = req.body
+    console.log(transactions)
     Transaction
-        .findById(transaction_id)
+        .find({ _id: { $in: transactions }, activeTransaction: true })
         .populate('buyer')
         .populate('product')
         .then(transaction => res.status(200).json(transaction))
