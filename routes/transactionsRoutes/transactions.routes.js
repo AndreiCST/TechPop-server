@@ -28,13 +28,20 @@ router.put('/reject/:transaction_id/:product_id', (req, res, next) => {
 
     const { transaction_id, product_id } = req.params
 
-    Transaction
-        .findByIdAndUpdate(transaction_id, { activeTransaction: false }, { new: true })
-        .then(() => {
-            Product.findByIdAndUpdate(product_id, { $pull: { buyRequest: transaction_id } })
-            res.status(200).json('Transaccion rechazada')
-        })
-        .catch(err => next(err))
+    const promises = [
+
+        Transaction.findByIdAndUpdate(transaction_id, { activeTransaction: false }, { new: true }),
+        Product.findByIdAndUpdate(product_id, { $pull: { buyRequest: transaction_id } }, { new: true })
+    ]
+
+    return Promise.all(promises)
+
+    // Transaction
+    //     .findByIdAndUpdate(transaction_id, { activeTransaction: false }, { new: true })
+    //     .then(() => {
+    //         return Product.findByIdAndUpdate(product_id, { $pull: { buyRequest: transaction_id } }, { new: true })
+    //     })
+    //     .catch(err => next(err))
 })
 
 router.put('/accept/:transaction_id/:product_id/:buyer_id/:seller_id', (req, res, next) => {
