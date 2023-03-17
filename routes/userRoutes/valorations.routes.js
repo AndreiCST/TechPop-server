@@ -27,15 +27,14 @@ router.put('/create/:product_id/:user_id/:reviewer_id', (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.get('/:user_id', (req, res, next) => {
-    const { user_id } = req.params
+router.get('/:valoration_id', (req, res, next) => {
+    const { valoration_id } = req.params
 
-    User
-        .findById(user_id)
-        .select({ valorations: 1 })
-        .populate('valorations.allValorations')
-        .then(valorations => res.status(200).json(valorations))
+    Valoration
+        .findById(valoration_id)
+        .then(elm => res.status(200).json(elm))
         .catch(err => next(err))
+
 })
 
 module.exports = router
